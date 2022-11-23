@@ -1,9 +1,9 @@
-﻿using CarbonTodo.Core.Todos;
-using CarbonTodo.Core.Todos.Entities;
+﻿using CarbonTodo.Core.Entities;
+using CarbonTodo.Core.Todos;
 using EntityFramework.Exceptions.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
-namespace CarbonTodo.Core.Data;
+namespace CarbonTodo.DAL.Data;
 
 public class DatabaseContext : DbContext
 {
@@ -21,5 +21,13 @@ public class DatabaseContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.AddTodos();
+        modelBuilder.Entity<Todo>().HasData(new Todo
+        {
+            Completed = false, Id = 1, Order = 1, Title = "todo", Url = ""
+        });
+        modelBuilder.Entity<Todo>().HasData(new Todo
+        {
+            Completed = true, Id = 2, Order = 2, Title = "todo1", Url = ""
+        });
     }
 }

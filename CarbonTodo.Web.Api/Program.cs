@@ -1,14 +1,15 @@
-using CarbonTodo.Api.Todos.Services;
-using CarbonTodo.Core.Data;
-using CarbonTodo.Core.Todos.Repositories;
+using CarbonTodo.Api.Services;
+using CarbonTodo.Core.Repositories;
+using CarbonTodo.DAL.Data;
+using CarbonTodo.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string spaHost = builder.Configuration["Spa:Host"];
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("TodoDb")
@@ -19,6 +20,14 @@ builder.Services.AddControllers()
     .AddNewtonsoftJson();
 
 var app = builder.Build();
+
+app.UseCors(c =>
+    {
+        c.AllowAnyHeader();
+        c.AllowAnyMethod();
+        c.WithOrigins(spaHost);
+    }
+);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

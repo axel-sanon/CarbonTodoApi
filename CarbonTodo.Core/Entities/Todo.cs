@@ -1,8 +1,8 @@
-﻿
-namespace CarbonTodo.Core.Todos.Entities
+﻿namespace CarbonTodo.Core.Entities;
+
+public class Todo
 {
-    public class Todo
-    {    public int Id { get; init; }
+    public int Id { get; init; }
 
     public string Title { get; set; }
 
@@ -35,6 +35,5 @@ namespace CarbonTodo.Core.Todos.Entities
     public static bool operator !=(Todo? left, Todo? right)
     {
         return !(left == right);
-    }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace CarbonTodo.Api.Todos.DTO;
+﻿namespace CarbonTodo.Api.DTO.Todo;
 
 public class PatchDto
 {
